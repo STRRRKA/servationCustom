@@ -1,0 +1,122 @@
+{% extends "index.html" %}
+{% block content %}     
+    <div id="title">
+      <h1 id="h">Бронирование билетов в кино</h1>
+      <h2 id="django" style="display: none;">{{people.count}}</h2>
+      {{ classes|json_script:'classdata' }}
+        
+      <form action="" method="POST">
+        {% csrf_token %}
+        <h2>Выберите сеанс</h2>
+        <select name="name" >
+          {% for session in sessions %}
+            <option >{{session.movie.name}}</option>
+          {% endfor %}
+        </select>
+        <input type="date" name="date" draggable="true" >
+        <input type="time" name="time">
+        <input type="submit" value="отправить">
+      </form>
+      <div id="people">
+        {% for person in people %}
+            <p>{{person}}</p>
+        {% endfor %}
+        [[customForm()]]
+        [[show()]]
+    </div>
+    
+    
+    
+    </div>    
+    <div>
+      {% for session in sessions %}
+        <div>Название фильма: {{session.movie.name}} Номер зала: {{session.hall.id}} Дата: {{session.date}} Время: {{session.time}}</div>    
+      {% endfor %}
+    </div>
+
+    <script>
+      
+    </script>
+    <script>const classes = JSON.parse(document.getElementById('classdata').textContent);
+    pythonClasses = classes['name'];
+    for (pythonClass of pythonClasses) {
+      document.write(`<li>${pythonClass}</li>`);
+    }
+    document.write(`<li>${classes}</li>`)
+    </script>
+    <script src="https://unpkg.com/vue@next"></script> 
+    <script>
+    Vue.createApp({
+      delimiters: ['[[', ']]'],
+      
+      data() {
+        return {
+          counter: 'Hello Vue 3!',
+          
+        }
+      },
+      
+      methods: {
+        // created(){
+        //   axios.get('zapros').then(function(responce){console.log(responce.data)})
+        // },
+        show() {
+          
+         // axios.get('zapros').then(function(responce){console.log(responce.data)})
+          var lst = [];
+          //var count = parseInt(document.getElementById("django").innerHTML) + 1; 
+          function handler(e){
+            if(e.target.classList=="place-free"){
+               e.target.classList.remove("place-free");
+               e.target.classList.add("place-target");
+               lst.push(e.target.id);
+             } else {
+               e.target.classList.remove("place-target");
+               e.target.classList.add("place-free");
+               
+               console.log();
+             }
+          }
+          //if (count > 0){
+          //  for (i=1; i<count; i++){
+          var articleDiv = document.getElementById("people");
+          var elem = document.createElement("div");
+          elem.setAttribute("id", parseInt("22"));          
+          elem.classList.add("place-free");
+          var elemText = document.createTextNode("э");
+          elem.appendChild(elemText);
+          elem.onclick=handler;
+          articleDiv.appendChild(elem);
+          
+          //}
+          
+          //}
+        },
+        customForm(){
+          let form = document.createElement('form');
+          form.addEventListener('submit', function(event) { // 1
+            event.preventDefault()
+            let data = new FormData();
+           data.append("csrfmiddlewaretoken", '{{csrf_token}}');
+           data.append("title", "harry");
+          axios.post('', data) // 4
+     .then(res => alert("Form Submitted")) // 5
+     .catch(errors => console.log(errors))
+    })
+          form.name="formmain";
+          form.action='';
+          form.method='POST';
+          form.innerHTML='{% csrf_token %}<input type="text" name="text" value="5" style="display:block;"><br><select name="select" multiple hidden><option selected>a</option><option selected>b</option></select><br><button onclick="sendform()">click</button>';
+          
+          
+          people.append(form);
+        
+          // function sendform(){            
+          //   form.submit();
+          // }
+        },
+      }
+    }).mount('#people');
+    </script> 
+    
+{% endblock content %}

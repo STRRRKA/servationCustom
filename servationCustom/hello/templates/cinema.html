@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %} 
+<div id="title">
+    <h1 id="h">Бронирование билетов в кино</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>Выберите сеанс</h2>
+        <select name="name" >
+            {% for session in sessions %}
+                <option>{{session.movie.name}}</option>
+            {% endfor %}            
+        </select>
+        <input type="date" name="date" draggable="true" >
+        <input type="time" name="time">
+        <input type="submit" value="отправить">
+    </form>
+</div>
+<div class="left">sdfsdf</div>
+<div class="sessions">
+    {% if check is None %}
+        {% for session in sessions %}
+            <div class="session">Название фильма: {{session.movie.name}} || Номер зала: {{session.hall.id}} || Дата: {{session.date}} || Время: {{session.time}}</div>  
+        {% endfor %}
+    {% else %}
+        <div class="session">{{check.movie.name}}</div>
+    {% endif %}
+</div>
+<div class="right">sdf</div>
+{% endblock content %}

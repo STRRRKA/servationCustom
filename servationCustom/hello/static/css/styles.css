@@ -1,0 +1,73 @@
+        body{
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20;
+        position: relative;
+      }
+      .place-free{
+        background-color: white;        
+        display: inline-block;
+        margin-right: 10px;
+        text-align: center;
+        padding: 30px;
+        cursor: pointer;
+        border-radius: 2px;
+        border-color: black;
+        border-style: ridge;
+        
+      }
+      .place-free:hover{
+        background-color: aqua;
+      }
+      .place-target{
+        background-color: black;
+        color: white;
+        display: inline-block;
+        margin-right: 10px;
+        text-align: center;
+        padding: 30px;
+        cursor: pointer;
+        border-radius: 2px;
+        border-color: white;
+        border-style: ridge;
+      }
+      #title{
+        text-align: center;
+        
+      }
+      .header{
+        text-align: right;
+      }
+      .header a{
+        color: black;
+        background-color: lightgray;
+        padding: 30px;
+        text-decoration: none;
+      }
+      .sessions{        
+        width: 34%;
+        background-color: aqua;
+        position: absolute;
+        left: 33%;
+      }
+      .right{
+        height: 100%;
+        width: 33%;
+        background-color: red;
+        position: absolute;
+        right: 0%;
+      }
+      .left{
+        height: 100%;
+        width: 33%;
+        background-color: green;
+        position: absolute;
+        left: 0%;
+      }
+      .session{
+        background-color: lightgray;
+        cursor: pointer;
+      }
+      .session:hover{
+        background-color: white;
+      }
