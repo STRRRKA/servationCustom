@@ -50,20 +50,6 @@
         position: absolute;
         left: 33%;
       }
-      .right{
-        height: 100%;
-        width: 33%;
-        background-color: red;
-        position: absolute;
-        right: 0%;
-      }
-      .left{
-        height: 100%;
-        width: 33%;
-        background-color: green;
-        position: absolute;
-        left: 0%;
-      }
       .session{
         background-color: lightgray;
         cursor: pointer;

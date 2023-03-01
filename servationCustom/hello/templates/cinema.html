@@ -15,16 +15,14 @@
         <input type="submit" value="отправить">
     </form>
 </div>
-<div class="left">sdfsdf</div>
 <div class="sessions">
     {% if check is None %}
         {% for session in sessions %}
-            assssssssssss
             <div class="session">Название фильма: {{session.movie.name}} || Номер зала: {{session.hall.id}} || Дата: {{session.date}} || Время: {{session.time}}</div>  
         {% endfor %}
     {% else %}
         <div class="session">{{check.movie.name}}</div>
     {% endif %}
 </div>
-<div class="right">sdf</div>
+
 {% endblock content %}

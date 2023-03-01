@@ -13,6 +13,10 @@ def getSessions(tmp=None):
     elif type(tmp) is int:
         return Session.objects.get(id=tmp)
 
+def createhall(request):
+
+    return render(request, "createhall.html")
+
 def index(request):
 
     return render(request, "index.html")

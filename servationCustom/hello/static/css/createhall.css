@@ -1,0 +1,29 @@
+.grid-container {
+    
+    display: grid;
+    
+}
+.grid-item {
+    
+    border: solid 2px #000;
+    text-align: center;
+    font-size: 15px;
+    
+    
+}
+.selected{
+    background-image: url(chair.png);
+}
+.free{
+    color: black;
+    background-color: white;
+}
+.grid-item:hover{
+    cursor: pointer;
+    background-color: aqua;
+}
+.openedSession{
+    position: absolute;
+    top: 100px;
+    left: 0%;
+}

@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="openedSession" id="OS">
+        <input type="text" id="rows">
+        <input type="text" id="columns">
+        <button id="btnCreate">Создать</button>
+        
+    </div> 
+    <script>
+        
+        let btn = document.getElementById('btnCreate');
+        btn.onclick = crt;
+        function crt(e){
+            let row = document.getElementById('rows').value;
+            
+            let column = document.getElementById('columns').value;
+            let container = document.createElement('div');
+            container.classList.add("grid-container");
+            let str = "grid" + ":repeat(" + row + ",50px)/repeat(" + column + ", 50px);";
+            container.style = str;
+            let os = document.getElementById('OS');
+            os.appendChild(container);
+            
+            
+            for (let i=1; i<=parseInt(row)*parseInt(column); i++){
+                let item = document.createElement('div');
+                item.setAttribute('id', i);
+                item.classList.add("grid-item");
+                item.classList.add("free");
+                item.innerHTML = i;
+                item.onclick=change;
+                function change(e){
+                    if(e.target.classList=="grid-item free"){
+                        e.target.classList.remove("free");
+                        e.target.classList.add("selected");
+                    }
+                    else{
+                        e.target.classList.remove("selected");
+                        e.target.classList.add("free");                     
+                    }
+                }
+                container.appendChild(item);
+            }
+        }
+    </script>
+{% endblock content %}

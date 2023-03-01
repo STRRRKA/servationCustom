@@ -23,6 +23,7 @@ urlpatterns = [
     path('avia/', hello_views.avia),
     path('cinema/', hello_views.cinema),
     path('cinema/<int:id>', hello_views.session),
+    path('cinema/createhall', hello_views.createhall),
     path('', hello_views.index, name="index"),
     path('admin', admin.site.urls),
     path('register/', user_views.register, name='register'),
