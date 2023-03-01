@@ -19,6 +19,7 @@
 <div class="sessions">
     {% if check is None %}
         {% for session in sessions %}
+            asss
             <div class="session">Название фильма: {{session.movie.name}} || Номер зала: {{session.hall.id}} || Дата: {{session.date}} || Время: {{session.time}}</div>  
         {% endfor %}
     {% else %}
