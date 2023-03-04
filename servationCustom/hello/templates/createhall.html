@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 {% block content %}
 {% load static %}
+<div id="test"></div>
     <div class="openedSession" id="OS">
         <input type="text" id="rows">
         <input type="text" id="columns">
@@ -71,6 +72,33 @@
                 }
                 container.appendChild(item);
             }
+            let maindiv = document.getElementById('OS');
+
+            let form = document.createElement('form');
+            form.addEventListener('submit', function(event) { // 1
+            event.preventDefault()
+            let data = new FormData();
+            data.append("csrfmiddlewaretoken", '{{csrf_token}}');
+            data.append("code", maindiv.innerHTML );
+            axios.post('', data) // 4
+              .then(res => alert("Form Submitted")) // 5
+              .catch(errors => console.log(errors))
+         });
+        form.name="formmain";
+        form.action='';
+        form.method='POST';
+        form.innerHTML='{% csrf_token %} <button id="savebutton">save2<button>';
+        let divtest = document.getElementById('test');
+        divtest.appendChild(form);
+        let svbtn = document.getElementById('savebutton');
+        svbtn.onclick = saveclick;
+        container.appendChild(savebutton);
+        function saveclick(){
+           form.submit();
+           
+        }
+        
+        
         }
 
 

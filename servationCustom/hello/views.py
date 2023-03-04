@@ -14,7 +14,8 @@ def getSessions(tmp=None):
         return Session.objects.get(id=tmp)
 
 def createhall(request):
-
+    if request.method == "POST":
+        print(request.POST.get("code"))
     return render(request, "createhall.html")
 
 def index(request):
