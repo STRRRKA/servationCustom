@@ -18,11 +18,24 @@
 <div class="sessions">
     {% if check is None %}
         {% for session in sessions %}
-            <div class="session">Название фильма: {{session.movie.name}} || Номер зала: {{session.hall.id}} || Дата: {{session.date}} || Время: {{session.time}}</div>  
+            <div class="session" id={{session.id}} >Название фильма: {{session.movie.name}} || Номер зала: {{session.hall.id}} || Дата: {{session.date}} || Время: {{session.time}}</div>  
         {% endfor %}
     {% else %}
-        <div class="session">{{check.movie.name}}</div>
+        <div class="session" id={{check.id}}>Название фильма: {{check.movie.name}} || Номер зала: {{check.hall.id}} || Дата: {{check.date}} || Время: {{check.time}}</div>
     {% endif %}
 </div>
-
+<script>
+    //onclick="javascript:window.location.href='link1.html'"
+    let sessionses = document.getElementsByClassName('session');
+    for (ses of sessionses){
+        ses.onclick = abss;
+        
+    }
+    function abss(){
+            window.location.href = ses.id;
+    }
+    // document.getElementsByClassName('session').onclick = function(){
+    //     window.location.href = "link1.html";
+    // };
+</script>
 {% endblock content %}

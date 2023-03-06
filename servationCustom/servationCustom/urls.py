@@ -24,6 +24,7 @@ urlpatterns = [
     path('cinema/', hello_views.cinema),
     path('cinema/<int:id>', hello_views.session),
     path('cinema/createhall', hello_views.createhall),
+    path('cinema/createsession', hello_views.createsession),
     path('', hello_views.index, name="index"),
     path('admin', admin.site.urls),
     path('register/', user_views.register, name='register'),

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Person, TicketCinema, Session, Movie
+from .models import Person, TicketCinema, Session, Movie, Hall
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
@@ -15,8 +15,14 @@ def getSessions(tmp=None):
 
 def createhall(request):
     if request.method == "POST":
-        print(request.POST.get("code"))
+        code = request.POST.get("code")
+        print(code)
+        Hall.objects.create(scheme=code, capacity=1)
     return render(request, "createhall.html")
+
+def createsession(request):
+
+    return render(request, "createsession.html")
 
 def index(request):
 
@@ -33,7 +39,7 @@ def avia(request):
 def session(request, id):
     # добавить в модель количество занятых
     session = getSessions(id)
-    return render(request, 'session.html', {"session": session})
+    return render(request, 'session.html', {"session": session.hall.scheme})
 
 def cinema(request):
     sessions = getSessions()

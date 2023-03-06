@@ -27,7 +27,9 @@ class Movie(models.Model):
     name = models.CharField(max_length=30)
 
 class Hall(models.Model):
+    id = models.BigAutoField(primary_key=True, serialize=False)
     capacity = models.IntegerField()
+    scheme = models.CharField(max_length=1000)
 
 class Session(models.Model):
     id = models.BigAutoField(primary_key=True, serialize=False)

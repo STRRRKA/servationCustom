@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block content %}
 {% load static %}
-<div id="test"></div>
+
     <div class="openedSession" id="OS">
         <input type="text" id="rows">
         <input type="text" id="columns">
@@ -38,23 +38,32 @@
         let btn = document.getElementById('btnCreate');
         btn.onclick = crt;
         function crt(e){
+            let checkans = document.getElementById("ans");
+            let checkform = document.getElementById("idform");
+            if (checkans){
+                checkans.remove();
+                checkform.remove();
+            }               
+            
             let row = document.getElementById('rows').value;
             let column = document.getElementById('columns').value;
+            let anscontainer = document.createElement('div');
+            anscontainer.setAttribute('id', 'ans');
             let container = document.createElement('div');
+            container.setAttribute('id', 'grid-container');
             container.classList.add("grid-container");
             let str = "grid" + ":repeat(" + row + ",70px)/repeat(" + column + ", 70px);";
             container.style = str;
             let os = document.getElementById('OS');
-            os.appendChild(container);
+            os.appendChild(anscontainer);
+            anscontainer.appendChild(container);
             
             
             for (let i=1; i<=parseInt(row)*parseInt(column); i++){
                 let item = document.createElement('div');
                 item.setAttribute('id', i);
                 item.classList.add("grid-item");
-                item.classList.add("free");
-                // let img = '<img src = "{% static "images/chair.png" %}" >'; 
-                // item.innerHTML = img;
+                item.classList.add("free");                
                 item.onclick=change;
                 function change(e){
                     if(status == "chair"){
@@ -72,33 +81,31 @@
                 }
                 container.appendChild(item);
             }
-            let maindiv = document.getElementById('OS');
 
             let form = document.createElement('form');
-            form.addEventListener('submit', function(event) { // 1
-            event.preventDefault()
-            let data = new FormData();
+            form.setAttribute('id', 'idform');
+            form.onsubmit = formSubmit;
+            function formSubmit(){
+
+                let data = new FormData();
             data.append("csrfmiddlewaretoken", '{{csrf_token}}');
-            data.append("code", maindiv.innerHTML );
-            axios.post('', data) // 4
-              .then(res => alert("Form Submitted")) // 5
-              .catch(errors => console.log(errors))
-         });
-        form.name="formmain";
-        form.action='';
-        form.method='POST';
-        form.innerHTML='{% csrf_token %} <button id="savebutton">save2<button>';
-        let divtest = document.getElementById('test');
-        divtest.appendChild(form);
-        let svbtn = document.getElementById('savebutton');
-        svbtn.onclick = saveclick;
-        container.appendChild(savebutton);
-        function saveclick(){
-           form.submit();
-           
-        }
-        
-        
+            data.append("code", anscontainer.innerHTML );
+            axios.post('', data)
+            };
+            //form.name="formmain";
+            form.action='';
+            //form.method='POST';
+            form.innerHTML='{% csrf_token %} <button id="savebutton">save2<button>';
+            let formdiv = document.createElement('div');
+            os.appendChild(form);
+            let svbtn = document.getElementById('savebutton');
+            svbtn.onclick = saveclick;
+            
+            function saveclick(){
+                form.submit();
+            }
+            
+
         }
 
 
