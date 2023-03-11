@@ -11,17 +11,9 @@ class TicketCinema(models.Model):
     placeNumber = models.IntegerField()
     servation = models.IntegerField()
 
-class User(models.Model):
-    name = models.CharField(max_length=20)
-    familia = models.CharField(max_length=20)
-    otchestvo = models.CharField(max_length=20)
-    login = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
-    mail = models.CharField(max_length=20)
-    number = models.CharField(max_length=20)
-    birthday = models.CharField(max_length=20)
-    def __str__(self):
-        return self.name
+class Reserved(models.Model):
+    id = models.BigAutoField(primary_key=True, serialize=False)
+    # userID = model.
 
 class Movie(models.Model):
     name = models.CharField(max_length=30)

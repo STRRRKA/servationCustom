@@ -58,10 +58,14 @@
             os.appendChild(anscontainer);
             anscontainer.appendChild(container);
             
-            
-            for (let i=1; i<=parseInt(row)*parseInt(column); i++){
+            let id = 0;
+            for (let i=0; i<row; i++){
+                
+                for(let j=0; j<column; j++){                
                 let item = document.createElement('div');
-                item.setAttribute('id', i);
+                item.setAttribute('id', id++);
+                item.setAttribute('row', parseInt(id/row));
+                item.setAttribute('column', parseInt(id/column));
                 item.classList.add("grid-item");
                 item.classList.add("free");                
                 item.onclick=change;
@@ -80,6 +84,7 @@
                     }
                 }
                 container.appendChild(item);
+            }
             }
 
             let form = document.createElement('form');
